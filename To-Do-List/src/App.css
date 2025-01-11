@@ -1,0 +1,8 @@
+.App{
+    width: 500px;
+    margin: 0px;
+
+    display: flex; /* 요소들간의 자연스러운 gap */
+    flex-direction: column;
+    gap: 10px;
+}
