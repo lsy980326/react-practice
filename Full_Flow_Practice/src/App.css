@@ -1,0 +1,22 @@
+/* 예: App.css (전역적으로 적용) */
+html, body {
+  margin: 0; 
+  padding: 0;
+  height: 100%;
+}
+
+/* 애니메이션이 들어갈 전체 페이지 배경 */
+body {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+
+  /* keyframes 이름: gradientAnimation, 20초 주기로 반복 */
+  animation: gradientAnimation 20s ease infinite;
+}
+
+/* 그라디언트가 좌우로 움직이는 keyframes */
+@keyframes gradientAnimation {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

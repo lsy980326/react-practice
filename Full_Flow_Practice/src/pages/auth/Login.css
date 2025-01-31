@@ -1,0 +1,71 @@
+/* 부모 컨테이너: 화면 전체를 채우며 중앙 정렬 */
+body {
+    margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    background-color: #f5f5f5; /* 배경 색상 (선택 사항) */
+  }
+  
+.Login {
+  width: 480px;
+  padding: 40px; /* 패딩 증가 */
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* 간격 증가 */
+  align-items: center;
+}
+
+.Login > div {
+  width: 100%;
+}
+
+.error-icon
+{
+  color: #b71c1c;
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.error-message {
+  /* 텍스트 및 배경 색상 */
+  color: #b71c1c; /* 좀 더 어두운 빨간색 */
+  background-color: #fce4e4; /* 연한 붉은 계열 배경 */
+
+  /* 테두리 및 모서리 */
+  border: 1px solid #f5c2c2; /* 배경보다 조금 진한 붉은 계열 테두리 */
+  border-radius: 4px;        /* 테두리 둥글림 */
+
+  /* 내부 여백 및 간격 */
+  padding: 8px 12px;
+  margin-top: 0.5rem;
+
+  /* 글자 크기 */
+  font-size: 0.875rem; /* 14px 정도 */
+
+  /* (선택) 텍스트 강조 */
+  font-weight: 500;    /* 약간 굵게 */
+
+  display: flex;
+  align-items: center;
+}
+
+/* 체크 마크 아이콘 스타일 */
+.checkmark-icon {
+  color: rgb(3, 124, 62);
+  font-size: 48px;
+  opacity: 0; /* 초기 투명도 */
+  transition: opacity 0.3s ease-in-out; /* 부드러운 나타남 효과 */
+}
+
+.success-message{
+  color: rgb(3, 124, 62);
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}

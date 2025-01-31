@@ -1,0 +1,55 @@
+.text-field-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  width: 100%; /* 부모 컨테이너에 맞춤 */
+  user-select: none;
+}
+
+.text-field-label {
+  margin-bottom: 0.5rem;
+  font-size: 14px;
+  color: #333;
+  user-select: none;
+}
+
+.text-field-required {
+  color: red;
+  margin-left: 4px;
+  user-select: none;
+}
+
+.text-field-input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0 10px;
+  width: 100%; /* 부모 컨테이너에 맞춤 */
+  box-sizing: border-box; /* 패딩 포함 크기 */
+  position: relative; /* 아이콘의 위치를 명확히 */
+  transition: border-color 0.2s ease;
+  user-select: none;
+}
+
+.text-field-input-wrapper:focus-within {
+  border-color: #1976d2;
+}
+
+.text-field-icon {
+  user-select: none;
+  position: absolute; /* 아이콘과 입력 필드를 완전히 분리 */
+  left: 10px; /* 입력 필드와 겹침 방지 */
+  font-size: 18px;
+  color: #888;
+}
+
+.text-field-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 10px 10px 10px 30px; /* 아이콘 공간을 고려한 패딩 */
+  background: none;
+  box-sizing: border-box;
+}

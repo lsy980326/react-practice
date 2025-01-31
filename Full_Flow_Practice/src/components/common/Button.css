@@ -1,0 +1,27 @@
+.custom-button {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  width: 100%; /* 부모 컨테이너 너비 */
+}
+
+.custom-button:hover {
+  background-color: #155a9c; /* Hover 시 색상 */
+}
+
+
+
+
+.custom-button.login {
+  background-color: #4caf50; /* 로그인 버튼 색상 */
+}
+
+.custom-button.login:hover {
+  background-color: #6dbd6f; /* 로그인 버튼 색상 */
+}
