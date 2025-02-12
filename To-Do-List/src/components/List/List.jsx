@@ -1,9 +1,11 @@
 import "./List.css";
 import TodoItem from "../TodoItem/TodoItem";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext } from "react";
+import {TodoStateContext} from "../../App"
 
 // 할일 목록과 검색, 통계 기능을 제공하는 컴포넌트임
-const List =({todos,onUpdate,onDelete})=>{
+const List =()=>{
+    const {todos} = useContext(TodoStateContext)
 
     // 검색어를 관리하는 상태임
     const [search,setSearch] = useState("")
@@ -81,9 +83,7 @@ const List =({todos,onUpdate,onDelete})=>{
                 {filteredTodos.map((todo)=>{
                     return (
                         <TodoItem key={todo.id} 
-                        {...todo}
-                        onUpdate={onUpdate}
-                        onDelete={onDelete}/>
+                        {...todo} />
                     )
                 })}
             </div>

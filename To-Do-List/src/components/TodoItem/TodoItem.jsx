@@ -1,9 +1,13 @@
 import "./TodoItem.css";
-import {memo} from "react"
+import {memo, useContext} from "react"
+import {TodoStateContext} from "../../App"
 
 // TodoItem 컴포넌트는 할 일 항목 하나를 렌더링하는 컴포넌트입니다
 // props로 id, isDone, content, date와 이벤트 핸들러 함수들을 받습니다
-const TodoItem = ({id,isDone,content,date,onUpdate,onDelete}) =>{
+const TodoItem = ({id,isDone,content,date}) =>{
+
+    const {onUpdate,onDelete} = useContext(TodoStateContext)
+
 
     const onChangeCheckbox = () => {
         onUpdate(id)

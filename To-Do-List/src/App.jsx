@@ -2,7 +2,7 @@ import './App.css'
 import Header from './components/header/Header'
 import Editor from './components/Editor/Editor'
 import List from './components/List/List'
-import { useState,useRef,useReducer,useCallback} from 'react' // 필요한 리액트 훅들을 가져옴
+import { useState,useRef,useReducer,useCallback,createContext} from 'react' // 필요한 리액트 훅들을 가져옴
 import { use } from 'react'
 
 // 초기 데이터 목록 - 앱 실행시 기본으로 표시될 할 일 목록
@@ -45,6 +45,8 @@ function reducer(state,action){
   }
 }
 
+export const TodoStateContext = createContext()
+
 
 function App() {
   // useReducer를 사용하여 todos 상태 관리
@@ -82,7 +84,7 @@ function App() {
   // 할 일을 삭제하는 함수
   const onDelete = useCallback((targetId)=>{
     dispatch({
-      type:"delete",
+      type:"DELETE",
       data:{
         id:targetId
       }
@@ -92,8 +94,12 @@ function App() {
   return (
     <div className="App">
       <Header /> {/* 앱 제목을 표시하는 헤더 컴포넌트 */}
-      <Editor onCraete={onCraete}/> {/* 새로운 할 일을 입력받는 컴포넌트 */}
-      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete}/> {/* 할 일 목록을 표시하고 관리하는 컴포넌트 */}
+      <TodoStateContext.Provider value={{
+        todos, onCraete, onUpdate, onDelete
+        }}>
+      <Editor/> {/* 새로운 할 일을 입력받는 컴포넌트 */}
+      <List/> {/* 할 일 목록을 표시하고 관리하는 컴포넌트 */}
+      </TodoStateContext.Provider>
     </div>
   )
 }
