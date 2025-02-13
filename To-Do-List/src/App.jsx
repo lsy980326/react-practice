@@ -2,7 +2,7 @@ import './App.css'
 import Header from './components/header/Header'
 import Editor from './components/Editor/Editor'
 import List from './components/List/List'
-import { useState,useRef,useReducer,useCallback,createContext} from 'react' // 필요한 리액트 훅들을 가져옴
+import { useState,useRef,useReducer,useCallback,createContext,useMemo} from 'react' // 필요한 리액트 훅들을 가져옴
 import { use } from 'react'
 
 // 초기 데이터 목록 - 앱 실행시 기본으로 표시될 할 일 목록
@@ -45,8 +45,11 @@ function reducer(state,action){
   }
 }
 
+// Context API를 사용하기 위한 createContext 생성
+// TodoStateContext: todos 상태값을 저장
+// TodoDispatchContext: 상태를 변경하는 함수들을 저장
 export const TodoStateContext = createContext()
-
+export const TodoDispatchContext = createContext()
 
 function App() {
   // useReducer를 사용하여 todos 상태 관리
@@ -91,14 +94,23 @@ function App() {
     })
   },[]) //함수 메모이제이션
 
+  // useMemo를 사용하여 dispatch 함수들을 메모이제이션
+  // 불필요한 리렌더링을 방지하기 위해 객체를 메모이제이션
+  const memoizedDispatch = useMemo(()=> ({
+    onCraete,
+    onUpdate,
+    onDelete
+  }),[])
+
   return (
     <div className="App">
       <Header /> {/* 앱 제목을 표시하는 헤더 컴포넌트 */}
-      <TodoStateContext.Provider value={{
-        todos, onCraete, onUpdate, onDelete
-        }}>
-      <Editor/> {/* 새로운 할 일을 입력받는 컴포넌트 */}
-      <List/> {/* 할 일 목록을 표시하고 관리하는 컴포넌트 */}
+      {/* Context Provider를 사용하여 하위 컴포넌트에 상태와 dispatch 함수들을 전달 */}
+      <TodoStateContext.Provider value={todos}>
+        <TodoDispatchContext.Provider value={memoizedDispatch}>
+          <Editor/> {/* 새로운 할 일을 입력받는 컴포넌트 */}
+          <List/> {/* 할 일 목록을 표시하고 관리하는 컴포넌트 */}
+        </TodoDispatchContext.Provider>
       </TodoStateContext.Provider>
     </div>
   )

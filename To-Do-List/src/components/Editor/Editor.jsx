@@ -1,10 +1,10 @@
 import "./Editor.css";
 import { useState,useRef,useContext } from "react";
-import {TodoStateContext} from "../../App"
+import {TodoDispatchContext} from "../../App"
 
 // 새로운 할 일을 입력받고 추가하는 컴포넌트임
 const Editor =()=>{
-    const {onCraete} = useContext(TodoStateContext)
+    const {onCraete} = useContext(TodoDispatchContext)
     // 입력한 할 일 내용 저장하는 상태임
     const [content, setContent] = useState("")
     // 입력창 포커스 제어용 ref임

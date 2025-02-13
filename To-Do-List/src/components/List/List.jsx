@@ -5,7 +5,7 @@ import {TodoStateContext} from "../../App"
 
 // 할일 목록과 검색, 통계 기능을 제공하는 컴포넌트임
 const List =()=>{
-    const {todos} = useContext(TodoStateContext)
+    const todos = useContext(TodoStateContext)
 
     // 검색어를 관리하는 상태임
     const [search,setSearch] = useState("")
