@@ -82,7 +82,7 @@ function App() {
     })
   }
 
-  const DiaryStateContext = createContext()
+  const DiaryDataContext = createContext()
   const DiaryDispatchContext = createContext()
 
 
@@ -91,27 +91,8 @@ function App() {
   // a태그를 이용한면 클라이언트 사이드 렌더링이 아닌 서버 사이드 렌더링이 되어 페이지가 새로고침됨
   return (
     <>
-    <button onClick={()=>{
-      onCrate(new Date().getTime(), 1, "새로운 일기 내용")
-    }}>
-      일기 추가
-    </button>
-
-    <button onClick={()=>{
-      onUpdate(1, new Date().getTime(), 3, "수정된 일기 내용")
-    }}>
-      일기 수정
-    </button>
-
-    <button onClick={()=>{
-      onDelete(1)
-    }
-    }>
-      일기 삭제
-    </button>
-
-    <DiaryStateContext.provider value={data}>
-      <DiaryDispatchContext.provider value={{onCrate, onUpdate, onDelete}}>
+    <DiaryDataContext.Provider value={data}>
+      <DiaryDispatchContext.Provider value={{onCrate, onUpdate, onDelete}}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/new" element={<New />} />
@@ -119,8 +100,8 @@ function App() {
           <Route path="/edit/:id" element={<Edit />} />
           <Route path="*" element={<Notfound/>} /> 
         </Routes>
-      </DiaryDispatchContext.provider>
-    </DiaryStateContext.provider>
+      </DiaryDispatchContext.Provider>
+    </DiaryDataContext.Provider>
   </>
   );
 }
