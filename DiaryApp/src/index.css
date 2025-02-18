@@ -1,0 +1,29 @@
+/* NanumPenScript 폰트를 정의합니다 */
+@font-face {
+    font-family: "NanumPenScript";
+    src: url("/NanumPenScript-Regular.ttf");
+}
+
+/* html과 body 태그의 기본 스타일을 설정합니다 */
+html,
+body {
+    margin: 0px;
+    width: 100%;
+    background-color: white;
+}
+
+/* 리액트 앱은 기본적으로 body 태그 안에 div의 id가 root인 요소 아래로 들어감감*/
+#root {
+    background-color: white;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 100vh; /* 현재 브라우저 높이 */
+    height: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 모든 body 내부 요소에 NanumPenScript 폰트를 적용합니다 */
+body * {
+    font-family: "NanumPenScript";
+}
