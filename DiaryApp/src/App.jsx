@@ -10,6 +10,8 @@ import New from './pages/New'
 import Diary from './pages/Diary'
 import Notfound from './pages/NotFound'
 import {getEmotionImage} from './util/get-emotion-image'
+import Button from './components/Button'
+import Header from './components/Header'
 
 // 1. "/" : 모든 일기를 조회하는 home 페이지
 // 2. "/new" : 새 일기를 작성하는 페이지
@@ -28,20 +30,36 @@ function App() {
   // 이미지의 수가 많으면 public 폴더도 이용
   return (
     <>
-    <div>
-      <img src={getEmotionImage(1)} alt="emotion1" />
-      <img src={getEmotionImage(2)} alt="emotion2" />
-      <img src={getEmotionImage(3)} alt="emotion3" />
-      <img src={getEmotionImage(4)} alt="emotion4" />
-      <img src={getEmotionImage(5)} alt="emotion5" />
-    </div>
+    <Header 
+      title={"header"}
+      leftChild={<Button text={"left"}></Button>}
+      rightChild={<Button text={"right"}></Button>}
+    />
 
-    <div>
-      <Link to="/">Home</Link>
-      <Link to="/new">New</Link>
-      <Link to="/diary">Diary</Link>
-    </div>
-    <button onClick={onClick}>New</button>
+    <Button 
+      text={"123"} 
+      type={"DEFAULT"}
+      onClick={()=>{
+        console.log("123")
+      }} 
+    />
+
+    <Button 
+      text={"123"} 
+      type={"POSITIVE"}
+      onClick={()=>{
+        console.log("123")
+      }} 
+    />    
+
+    <Button 
+      text={"123"} 
+      type={"NAGATIVE"}
+      onClick={()=>{
+        console.log("123")
+      }} 
+    />
+
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/new" element={<New />} />

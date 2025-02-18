@@ -1,7 +1,7 @@
 /* NanumPenScript 폰트를 정의합니다 */
 @font-face {
-    font-family: "NanumPenScript";
-    src: url("/NanumPenScript-Regular.ttf");
+    font-family: "GowunDodum";
+    src: url("/GowunDodum-Regular.ttf");
 }
 
 /* html과 body 태그의 기본 스타일을 설정합니다 */
@@ -21,9 +21,10 @@ body {
     min-height: 100vh; /* 현재 브라우저 높이 */
     height: 100%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 0px 20px;
 }
 
 /* 모든 body 내부 요소에 NanumPenScript 폰트를 적용합니다 */
 body * {
-    font-family: "NanumPenScript";
+    font-family: "GowunDodum";
 }
