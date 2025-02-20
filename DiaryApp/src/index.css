@@ -10,6 +10,7 @@ body {
     margin: 0px;
     width: 100%;
     background-color: white;
+    display: flex;
 }
 
 /* 리액트 앱은 기본적으로 body 태그 안에 div의 id가 root인 요소 아래로 들어감감*/
