@@ -20,7 +20,6 @@ const Home = () => {
     const [pivotDate, setPivotDate] = useState(new Date()); // 현재 선택된 월 상태 관리
 
     const monthlyData = getMonthlyData(pivotDate,data); // 선택된 월의 일기 데이터만 필터링
-    console.log(monthlyData);
 
     const onIncreateMonth = () => {
         setPivotDate(new Date(pivotDate.getFullYear(), pivotDate.getMonth() + 1));
