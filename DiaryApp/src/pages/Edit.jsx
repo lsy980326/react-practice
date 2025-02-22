@@ -4,27 +4,15 @@ import Button from "../components/Button";
 import Editor from "../components/Editor";
 import { useContext,useEffect,useState } from "react";
 import { DiaryStateContext, DiaryDispatchContext } from "../App";
+import useDiary from "../hooks/useDiary";
 
 const Edit = () => {
     const params = useParams();
     const nav = useNavigate();
     const {onUpdate, onDelete} = useContext(DiaryDispatchContext);
-    const data = useContext(DiaryStateContext);
-    const [curDiraryItem, setCurDiaryItem] = useState();
+    const curDiraryItem = useDiary(params.id);
 
-
-    useEffect(()=>{
-        const currentDiaryItem = data.find(
-            (item)=>String(item.id) === String(params.id)
-        );
-
-        if(!currentDiaryItem){
-            window.alert("해당 일기를 찾을 수 없습니다.");
-            nav('/',{replace:true});
-        }
-
-        setCurDiaryItem(currentDiaryItem);
-    },[params.id]);
+    
 
     const onClickDelete = () => {
         if(window.confirm("정말 삭제하시겠습니까?"))
