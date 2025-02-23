@@ -1,5 +1,5 @@
 import './App.css'
-import {useReducer,useRef,createContext} from 'react'
+import {useReducer,useRef,createContext, useEffect, useState} from 'react'
 import {Routes, Route} from 'react-router-dom'
 import Home from './pages/Home'
 import New from './pages/New'
@@ -10,40 +10,34 @@ import Edit from './pages/Edit'
 // 2. "/new" : 새 일기를 작성하는 페이지
 // 3. "/diary" : 일기를 조회하는 페이지
 
-const mockData = [
-  // 테스트용 더미 데이터
-  {
-    id: 1,
-    createdDate: new Date("2025-02-19").getTime(), // 날짜를 밀리초로 변환하여 저장
-    emotionId:1,
-    content:"1번 일기 내용"
-  },
-  {
-    id: 2,
-    createdDate: new Date("2025-02-18").getTime(),
-    emotionId:2,
-    content:"2번 일기 내용"
-  },
-  {
-    id: 3,
-    createdDate: new Date("2025-01-18").getTime(),
-    emotionId:3,
-    content:"3번 일기 내용"
-  }
-]
-
-
 function reducer(state, action){
+  let nextState;
+
   switch(action.type){
-    case "CREATE": return [action.data,...state] // 새 일기를 배열 맨 앞에 추가
-    case "UPDATE": return state.map((item)=>  // id가 일치하는 일기 내용 수정
+    case "INIT":
+     return action.data; //로컬스토리지에 보관할 필요가 없어서 바로 return
+    case "CREATE": 
+    { 
+      nextState = [action.data,...state];
+      break;
+    } // 새 일기를 배열 맨 앞에 추가
+    case "UPDATE": 
+    { 
+      nextState = state.map((item)=>  // id가 일치하는 일기 내용 수정
       String(item.id) === String(action.data.id)
       ? action.data
-      : item
-    )
-    case "DELETE": return state.filter((item)=> // id가 일치하는 일기 삭제
-       String(item.id) !== String(action.data.id))
+      : item)
+      break;
+    }
+    case "DELETE": 
+    {
+      nextState = state.filter((item)=> // id가 일치하는 일기 삭제
+      String(item.id) !== String(action.data.id))
+      break;
+    }
   }
+  localStorage.setItem('diary',JSON.stringify(nextState));
+  return nextState;
 }
 
 // 전역 상태 관리를 위한 Context 생성
@@ -52,8 +46,41 @@ export const DiaryDispatchContext = createContext();
 
 
 function App() {
-  const [data, dispatch] = useReducer(reducer,mockData)
-  const idRef = useRef(4)
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, dispatch] = useReducer(reducer,[])
+  const idRef = useRef(0)
+
+  useEffect(()=>{
+    const storedData = localStorage.getItem('diary');
+    if(!storedData){
+      setIsLoading(false);
+      return
+    }
+
+    const parsedData = JSON.parse(storedData);
+    if(!Array.isArray(parsedData)){
+      setIsLoading(false);
+      return;
+    }
+
+
+    let maxId = 0;
+    parsedData.forEach((item)=>{
+      if(item.id > maxId){
+        maxId = item.id;
+      }
+    })
+
+    idRef.current = maxId + 1;
+
+    dispatch({
+      type: "INIT",
+      data: parsedData,
+    });
+
+    setIsLoading(false);
+  },[])
+
 
   // 새로운 일기 추가
   const onCreate = (createdDate, emotionId, content) => {
@@ -92,6 +119,10 @@ function App() {
         id
       }
     })
+  }
+
+  if(isLoading){
+    return <div>로딩중...</div>
   }
 
   // 이미지를 assets 폴더에 넣어서 사용하면 vite에서 자동으로 최적화해서 처리함(캐싱)
