@@ -5,10 +5,13 @@ import Viewer from "../components/Viewer";
 import { useNavigate } from "react-router-dom";
 import useDiary from "../hooks/useDiary";
 import getStringedDate from "../util/get-stringed-date";
+import usePageTitle from "../hooks/usePageTitle";
+import { use } from "react";
 
 const Diary = () => {
     const parmas = useParams();
     const nav = useNavigate();
+    usePageTitle(`${parmas.id}번 일기`);
 
     // useDiary 커스텀 훅에서 useEffect를 사용하여 데이터를 가져옴
     // useEffect의 특성상 컴포넌트가 마운트된 후 비동기로 데이터를 요청하므로
