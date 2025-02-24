@@ -1,13 +1,12 @@
 import Header from '../components/Header';
 import Button from '../components/Button';
-import Edtior from '../components/Editor';
+import Editor from '../components/Editor';
 import { useNavigate } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
-import { DiaryDispatchContext } from '../App';
 import usePageTitle from '../hooks/usePageTitle';
+import useDiaryStore from '../store/Diary';
 
 const New = () => {
-    const {onCreate} = useContext(DiaryDispatchContext);
+    const onCreate = useDiaryStore((state) => state.createDiary); // 훅을 호출하여 onCreate 가져오기
     const nav = useNavigate();
     usePageTitle("새 일기 쓰기");
 
@@ -17,8 +16,8 @@ const New = () => {
             input.emotionId,
             input.content
         );
-        nav('/',{replace:true})
-    }
+        nav('/', { replace: true });
+    };
 
     // 네비게이트에 -1을 입력하면 페이지 뒤로 가기
     return (
@@ -27,12 +26,12 @@ const New = () => {
                 title={"새 일기 쓰기"}
                 leftChild={<Button 
                     text={"< 뒤로가기"}
-                    onClick={()=>nav(-1)}
-                    />}
+                    onClick={() => nav(-1)}
+                />}
             />
-            <Edtior onSubmit={onSubmit}/>
+            <Editor onSubmit={onSubmit} />
         </div>
     );
-}
+};
 
 export default New;

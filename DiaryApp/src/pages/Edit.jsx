@@ -2,16 +2,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Button from "../components/Button";
 import Editor from "../components/Editor";
-import { useContext,useEffect,useState } from "react";
-import { DiaryStateContext, DiaryDispatchContext } from "../App";
 import useDiary from "../hooks/useDiary";
 import usePageTitle from "../hooks/usePageTitle";
-import { use } from "react";
+import useDiaryStore from '../store/Diary'
 
 const Edit = () => {
     const params = useParams();
     const nav = useNavigate();
-    const {onUpdate, onDelete} = useContext(DiaryDispatchContext);
+    const onUpdate = useDiaryStore((state) => state.updateDiary);
+    const onDelete = useDiaryStore((state) => state.deleteDiary);
     const curDiraryItem = useDiary(params.id);
     usePageTitle(`${params.id}번 일기 수정`);
 
@@ -27,7 +26,7 @@ const Edit = () => {
     }
 
     const onSubmit = (input) => {
-        if(window.confirm("정말 수정정하시겠습니까?"))
+        if(window.confirm("정말 수정하시겠습니까?"))
         {
             onUpdate(
                 params.id,

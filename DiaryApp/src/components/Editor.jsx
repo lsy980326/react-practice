@@ -28,8 +28,6 @@ const Editor = ({initData,onSubmit}) => {
 
 
     const onChangeInput = (e) => {
-        console.log(e.target.name, e.target.value);
-
         let name = e.target.name;
         let value = e.target.value;
 

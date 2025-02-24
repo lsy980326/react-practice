@@ -7,7 +7,7 @@ import useDiary from "../hooks/useDiary";
 import getStringedDate from "../util/get-stringed-date";
 import usePageTitle from "../hooks/usePageTitle";
 import { use } from "react";
-import Loading from './Lottie/Loading' 
+import Loading from '../Lottie/Loading' 
 
 const Diary = () => {
     const parmas = useParams();

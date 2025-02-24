@@ -1,27 +1,31 @@
-import { useContext, useEffect, useState } from 'react';
-import { DiaryStateContext } from '../App';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useDiaryStore from '../store/Diary';
 
 // 커스텀 훅
 const useDiary = (id) => {
-    const data = useContext(DiaryStateContext);
-    const [curDiraryItem, setCurDiaryItem] = useState();
+    const data = useDiaryStore((state) => state.data); // 훅을 호출하여 data 가져오기
+    const [curDiaryItem, setCurDiaryItem] = useState();
     const nav = useNavigate();
 
-    useEffect(()=>{
-        const currentDiaryItem = data.find(
-            (item)=>String(item.id) === String(id)
-        );
-
-        if(!currentDiaryItem){
-            window.alert("해당 일기를 찾을 수 없습니다.");
-            nav('/',{replace:true});
+    useEffect(() => {
+        if (!data || data.length === 0) {
+            return;
         }
 
-        setCurDiaryItem(currentDiaryItem);
-    },[id]);
+        const currentDiaryItem = data.find(
+            (item) => String(item.id) === String(id)
+        );
 
-    return curDiraryItem;
+        if (!currentDiaryItem) {
+            window.alert("해당 일기를 찾을 수 없습니다.");
+            nav('/', { replace: true });
+        } else {
+            setCurDiaryItem(currentDiaryItem);
+        }
+    }, [id, nav]);
+
+    return curDiaryItem;
 };
 
 export default useDiary;
