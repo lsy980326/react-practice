@@ -6,10 +6,13 @@ import New from './pages/New'
 import Diary from './pages/Diary'
 import Notfound from './pages/NotFound'
 import Edit from './pages/Edit'
+import Loading from './Lottie/Loading'
+
+
+
 // 1. "/" : 모든 일기를 조회하는 home 페이지
 // 2. "/new" : 새 일기를 작성하는 페이지
 // 3. "/diary" : 일기를 조회하는 페이지
-
 function reducer(state, action){
   let nextState;
 
@@ -122,7 +125,7 @@ function App() {
   }
 
   if(isLoading){
-    return <div>로딩중...</div>
+    return <Loading />
   }
 
   // 이미지를 assets 폴더에 넣어서 사용하면 vite에서 자동으로 최적화해서 처리함(캐싱)

@@ -7,6 +7,7 @@ import useDiary from "../hooks/useDiary";
 import getStringedDate from "../util/get-stringed-date";
 import usePageTitle from "../hooks/usePageTitle";
 import { use } from "react";
+import Loading from './Lottie/Loading' 
 
 const Diary = () => {
     const parmas = useParams();
@@ -21,7 +22,7 @@ const Diary = () => {
     // 첫 렌더링(undefined) -> 데이터 요청 -> 데이터 수신 -> 재렌더링 순서로 동작
     // 따라서 undefined 체크는 필수적임
     if(curDiraryItem === undefined){
-        return <div>로딩중...</div>
+        return <Loading/>
     }
     const {createdDate,emotionId,content} = curDiraryItem;
     const title = getStringedDate(new Date(createdDate));
